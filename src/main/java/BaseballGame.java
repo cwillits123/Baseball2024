@@ -169,7 +169,7 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
 		}
 		//Get the field image
 		try {
-			field = ImageIO.read(new File("Field.jpg")).getScaledInstance(800, 800, Image.SCALE_DEFAULT);
+			field = ImageIO.read(new File("src/main/java/Field.jpg")).getScaledInstance(800, 800, Image.SCALE_DEFAULT);
 			;
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
@@ -271,6 +271,7 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
 				
 				super.paintComponent(g);
 				g.drawImage(field, 0, 0, null);
+                
 
 				// border
 				g.setColor(Color.BLACK);
@@ -479,7 +480,7 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
 
 			}
 		};
-		//Addig everything to the game
+		//Adding everything to the game
 		scoreBoard = new JPanel(new GridLayout(3, 7));
 		scoreBoard.setOpaque(true);
 		frame.add(panel);

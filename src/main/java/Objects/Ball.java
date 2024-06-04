@@ -41,7 +41,7 @@ public class Ball extends AnimatedObject {
         super(container);
         Random r = new Random();
 
-        upperLeft = new Point2D.Double(topCenter.x - 100 / 2, topCenter.y);
+        upperLeft = new Point2D.Double(topCenter.x - 75 / 2, topCenter.y);
         this.bottom = container.getHeight();
         this.container = container;
         this.ySpeed = r.nextInt(9) + 5;
@@ -71,11 +71,11 @@ public class Ball extends AnimatedObject {
 
     public static void loadBaseballPicture() {
         Toolkit tool = Toolkit.getDefaultToolkit();
-        Ball.baseballImage = tool.getImage(ballPicName).getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+        Ball.baseballImage = tool.getImage(ballPicName).getScaledInstance(10, 10, Image.SCALE_DEFAULT);
     }
 
     public Point2D.Double getLocation() {
-        return new Point2D.Double(upperLeft.x + 15, upperLeft.y + 15);
+        return new Point2D.Double(upperLeft.x + 5, upperLeft.y + 5);
     }
 
 

@@ -34,7 +34,7 @@ public class Hit extends AnimatedObject {
 
     private static final int SIZE = 30;
 
-    private static final String ballPicFilename = "baseball.jpg.png";
+    private static final String ballPicFilename = "src/main/java/Objects/baseball.jpg.png";
 
     // who do we live in so we can repaint?
     private JComponent container;

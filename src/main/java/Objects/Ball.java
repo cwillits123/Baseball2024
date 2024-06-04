@@ -29,7 +29,7 @@ public class Ball extends AnimatedObject {
     //Image of the baseball
     private static Image baseballImage;
 
-    private static final String ballPicName = "baseball.jpg.png";
+    private static final String ballPicName = "src/main/java/Objects/baseball.jpg.png";
 
     /**
      * Constructs a Ball object

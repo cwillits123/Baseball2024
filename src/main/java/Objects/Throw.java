@@ -4,14 +4,12 @@ import javax.swing.*;
 import java.awt.geom.Point2D;
 
 /**
- * The hit class is in charge of the hit moving to the point calculated in the BaseballGame class
+ * The throw class is in charge of the throw moving to the player calculated in the BaseballGame class
  * 
- * @author Justin Montagne, Sam Goldstein, Arizona Belden, and Anthony Russo
- * @version Spring 2022
- * 
- * @author Colin Willits (Modified Version) @version June 2024
+ * @author Colin Willits
+ * @version June 2024
  */
-public class Hit extends AnimatedObject {
+public class Throw extends AnimatedObject {
     // delay time between frames of animation (ms)
 
     // we don't want to move too quickly, so a delay here of about 33
@@ -27,7 +25,7 @@ public class Hit extends AnimatedObject {
 
     // latest location of the ball
     private Point2D.Double upperLeft;
-    // Endpoint of the hit
+    // Endpoint of the throw
     private Point2D.Double endPoint;
 
     private static Image baseballPic;
@@ -40,7 +38,7 @@ public class Hit extends AnimatedObject {
     private JComponent container;
 
     /**
-     * Construct a new Hit object.
+     * Construct a new Throw object.
      * 
      * @param startTopCenter the initial point at which the top of the
      *                       ball should be drawn
@@ -48,7 +46,7 @@ public class Hit extends AnimatedObject {
      *                       drawn to allow it to call that component's repaint
      *                       method
      */
-    public Hit(Point2D.Double upperLeft, JComponent container, Point2D.Double endPoint) {
+    public Throw(Point2D.Double upperLeft, JComponent container, Point2D.Double endPoint) {
         super(container);
 
         this.upperLeft = upperLeft;
@@ -130,7 +128,7 @@ public class Hit extends AnimatedObject {
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
 
-        Hit.baseballPic = toolkit.getImage(ballPicFilename).getScaledInstance(10, 10, Image.SCALE_DEFAULT);
+        Throw.baseballPic = toolkit.getImage(ballPicFilename).getScaledInstance(10, 10, Image.SCALE_DEFAULT);
 
     }
 

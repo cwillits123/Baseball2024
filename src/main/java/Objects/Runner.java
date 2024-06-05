@@ -94,7 +94,7 @@ public class Runner extends AnimatedObject {
      */
     public void paint(Graphics g) {
         g.setColor(color);
-        g.fillOval((int)upperLeft.x, (int)upperLeft.y, 20, 20);
+        g.fillOval((int)upperLeft.x, (int)upperLeft.y, 10, 10);
     }
     /**
      * Checks if the runner is within 5 pixels of the base

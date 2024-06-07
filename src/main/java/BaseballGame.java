@@ -157,6 +157,8 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
 	private Color team2Color;
 	//Check if the fielder should be drawn
 	private boolean isOut;
+	//Check if the fielders should be drawn for a hit
+	private boolean isHit;
 	//Check if the runner was caught while stealing
 	private boolean caughtRunning;
 	//Which runner was caught
@@ -315,6 +317,7 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
 					draw = true;
 					drawFielders = false;
 					isOut = false;
+					isHit = false;
 					// checks if the hit required the runners to move more
 					if (numBases > 0 && !caughtRunning) {
 						numBases--;
@@ -357,7 +360,7 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
 				g.setColor(fielderColor);
 				if (drawFielders) {
 
-					if (location == 1 && isOut) {
+					if (location == 1 && (isOut || isHit)) {
 						g.fillOval(390, 200, 10, 10);
 						g.fillOval(550, 250, 10, 10);
                         //Adding Infielders
@@ -366,7 +369,7 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
                         g.fillOval(310, 455, 10, 10);//Third
                         g.fillOval(330, 405, 10, 10);//Short
                         g.fillOval(395, 615, 10, 10);//Catcher
-					} else if (location == 2 && isOut) {
+					} else if (location == 2 && (isOut || isHit)) {
 						g.fillOval(230, 250, 10, 10);
 						g.fillOval(550, 250, 10, 10);
                         //Adding Infielders
@@ -375,7 +378,7 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
                         g.fillOval(310, 455, 10, 10);//Third
                         g.fillOval(330, 405, 10, 10);//Short
                         g.fillOval(395, 615, 10, 10);//Catcher
-					} else if (location == 3 && isOut) {
+					} else if (location == 3 && (isOut || isHit)) {
 						g.fillOval(230, 250, 10, 10);
 						g.fillOval(390, 200, 10, 10);
                         //Adding Infielders
@@ -625,56 +628,59 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
 					if (hit < 2) {
 						displayText = "Single!";
                         Fielder newFielder = new Fielder(LEFT_FIELDER, panel, leftField[hit], fielderColor);
-                        Fielder newFielderBase = new Fielder(SECOND_BASEMAN, panel, secondBase, fielderColor);
-                        list.add(newFielderBase);
 						list.add(newFielder);
 						newFielder.start();
-                        newFielderBase.start();
 						moveRunner();
 						numBases = 0;
 						Runner newRunner = new Runner(runnerColor, 0, panel);
 						list.add(newRunner);
 						newRunner.start();
 						runnerCheck[0] = true;
+						Fielder newFielderBase = new Fielder(SECOND_BASEMAN, panel, secondBase, fielderColor);
+                        list.add(newFielderBase);
+						newFielderBase.start();
                         Throw newThrow = new Throw(leftField[hit], panel, secondBase);
                         list.add(newThrow);
                         newThrow.start();
+						isHit = true;
 					//If number is 2 or 3, double
 					} else if (hit < 4) {
 						displayText = "Double!";
                         Fielder newFielder = new Fielder(LEFT_FIELDER, panel, leftField[hit], fielderColor);
-                        Fielder newFielderBase = new Fielder(THIRD_BASEMAN, panel, thirdBase, fielderColor);
-                        list.add(newFielderBase);
 						list.add(newFielder);
 						newFielder.start();
-                        newFielderBase.start();
 						moveRunner();
 						numBases = 1;
 						Runner newRunner = new Runner(runnerColor, 0, panel);
 						list.add(newRunner);
 						newRunner.start();
 						runnerCheck[0] = true;
+						Fielder newFielderBase = new Fielder(THIRD_BASEMAN, panel, thirdBase, fielderColor);
+                        list.add(newFielderBase);
+						newFielderBase.start();
                         Throw newThrow = new Throw(leftField[hit], panel, thirdBase);
                         list.add(newThrow);
                         newThrow.start();
+						isHit = true;
 					//If number is 4, triple
 					} else if (hit == 4) {
 						displayText = "Triple!";
                         Fielder newFielder = new Fielder(LEFT_FIELDER, panel, leftField[hit], fielderColor);
-                        Fielder newFielderBase = new Fielder(CATCHER, panel, homePlate, fielderColor);
-                        list.add(newFielderBase);
 						list.add(newFielder);
 						newFielder.start();
-                        newFielderBase.start();
 						moveRunner();
 						numBases = 2;
 						Runner newRunner = new Runner(runnerColor, 0, panel);
 						list.add(newRunner);
 						newRunner.start();
 						runnerCheck[0] = true;
+						Fielder newFielderBase = new Fielder(CATCHER, panel, homePlate, fielderColor);
+                        list.add(newFielderBase);
+						newFielderBase.start();
                         Throw newThrow = new Throw(leftField[hit], panel, homePlate);
                         list.add(newThrow);
                         newThrow.start();
+						isHit = true;
 					//If number is between 5 and 11, out
 					} else if (hit < 12) {
 						incrementOut();
@@ -695,7 +701,6 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
 						list.add(newRunner);
 						newRunner.start();
 						runnerCheck[0] = true;
-
 					}
 					list.get(0).done = true;
 					panel.repaint();
@@ -711,56 +716,59 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
 					if (hit < 2) {
 						displayText = "Single!";
                         Fielder newFielder = new Fielder(CENTER_FIELDER, panel, centerField[hit], fielderColor);
-                        Fielder newFielderBase = new Fielder(SECOND_BASEMAN, panel, secondBase, fielderColor);
-                        list.add(newFielderBase);
 						list.add(newFielder);
 						newFielder.start();
-                        newFielderBase.start();
 						moveRunner();
 						numBases = 0;
 						Runner newRunner = new Runner(runnerColor, 0, panel);
 						list.add(newRunner);
 						newRunner.start();
 						runnerCheck[0] = true;
+						Fielder newFielderBase = new Fielder(SECOND_BASEMAN, panel, secondBase, fielderColor);
+                        list.add(newFielderBase);
+						newFielderBase.start();
                         Throw newThrow = new Throw(centerField[hit], panel, secondBase);
                         list.add(newThrow);
                         newThrow.start();
+						isHit = true;
 					//If number is 2 or 3, double
 					} else if (hit < 4) {
 						displayText = "Double!";
                         Fielder newFielder = new Fielder(CENTER_FIELDER, panel, centerField[hit], fielderColor);
-                        Fielder newFielderBase = new Fielder(THIRD_BASEMAN, panel, thirdBase, fielderColor);
-                        list.add(newFielderBase);
 						list.add(newFielder);
 						newFielder.start();
-                        newFielderBase.start();
 						moveRunner();
 						numBases = 1;
 						Runner newRunner = new Runner(runnerColor, 0, panel);
 						list.add(newRunner);
 						newRunner.start();
 						runnerCheck[0] = true;
+						Fielder newFielderBase = new Fielder(THIRD_BASEMAN, panel, thirdBase, fielderColor);
+                        list.add(newFielderBase);
+						newFielderBase.start();
                         Throw newThrow = new Throw(centerField[hit], panel, thirdBase);
                         list.add(newThrow);
                         newThrow.start();
+						isHit = true;
 					//If number is 4, triple
 					} else if (hit == 4) {
 						displayText = "Triple!";
                         Fielder newFielder = new Fielder(CENTER_FIELDER, panel, centerField[hit], fielderColor);
-                        Fielder newFielderBase = new Fielder(CATCHER, panel, homePlate, fielderColor);
-                        list.add(newFielderBase);
 						list.add(newFielder);
 						newFielder.start();
-                        newFielderBase.start();
 						moveRunner();
 						numBases = 2;
 						Runner newRunner = new Runner(runnerColor, 0, panel);
 						list.add(newRunner);
 						newRunner.start();
 						runnerCheck[0] = true;
+						Fielder newFielderBase = new Fielder(CATCHER, panel, homePlate, fielderColor);
+                        list.add(newFielderBase);
+						newFielderBase.start();
                         Throw newThrow = new Throw(centerField[hit], panel, homePlate);
                         list.add(newThrow);
                         newThrow.start();
+						isHit = true;
 					//If number is between 5 and 11, out
 					} else if (hit < 12) {
 						incrementOut();
@@ -797,56 +805,59 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
 					if (hit < 2) {
 						displayText = "Single!";
                         Fielder newFielder = new Fielder(RIGHT_FIELDER, panel, rightField[hit], fielderColor);
-                        Fielder newFielderBase = new Fielder(SHORT_STOP, panel, secondBase, fielderColor);
-                        list.add(newFielderBase);
 						list.add(newFielder);
 						newFielder.start();
-                        newFielderBase.start();
 						moveRunner();
 						numBases = 0;
 						Runner newRunner = new Runner(runnerColor, 0, panel);
 						list.add(newRunner);
 						newRunner.start();
 						runnerCheck[0] = true;
+						Fielder newFielderBase = new Fielder(SHORT_STOP, panel, secondBase, fielderColor);
+                        list.add(newFielderBase);
+						newFielderBase.start();
                         Throw newThrow = new Throw(rightField[hit], panel, secondBase);
                         list.add(newThrow);
                         newThrow.start();
+						isHit = true;
 					//If number is 2 or 3, double
 					} else if (hit < 4) {
 						displayText = "Double!";
                         Fielder newFielder = new Fielder(RIGHT_FIELDER, panel, rightField[hit], fielderColor);
-                        Fielder newFielderBase = new Fielder(THIRD_BASEMAN, panel, thirdBase, fielderColor);
-                        list.add(newFielderBase);
 						list.add(newFielder);
 						newFielder.start();
-                        newFielderBase.start();
 						moveRunner();
 						numBases = 1;
 						Runner newRunner = new Runner(runnerColor, 0, panel);
 						list.add(newRunner);
 						newRunner.start();
 						runnerCheck[0] = true;
+						Fielder newFielderBase = new Fielder(THIRD_BASEMAN, panel, thirdBase, fielderColor);
+                        list.add(newFielderBase);
+						newFielderBase.start();
                         Throw newThrow = new Throw(rightField[hit], panel, thirdBase);
                         list.add(newThrow);
                         newThrow.start();
+						isHit = true;
 					//If number is 4, triple
 					} else if (hit == 4) {
 						displayText = "Triple!";
                         Fielder newFielder = new Fielder(RIGHT_FIELDER, panel, rightField[hit], fielderColor);
-                        Fielder newFielderBase = new Fielder(CATCHER, panel, homePlate, fielderColor);
-                        list.add(newFielderBase);
 						list.add(newFielder);
 						newFielder.start();
-                        newFielderBase.start();
 						moveRunner();
 						numBases = 2;
 						Runner newRunner = new Runner(runnerColor, 0, panel);
 						list.add(newRunner);
 						newRunner.start();
 						runnerCheck[0] = true;
+						Fielder newFielderBase = new Fielder(CATCHER, panel, homePlate, fielderColor);
+                        list.add(newFielderBase);
+						newFielderBase.start();
                         Throw newThrow = new Throw(rightField[hit], panel, homePlate);
                         list.add(newThrow);
                         newThrow.start();
+						isHit = true;
 					//If number is between 5 and 11, out
 					} else if (hit < 12) {
 						incrementOut();

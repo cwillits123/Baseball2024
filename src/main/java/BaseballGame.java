@@ -630,19 +630,19 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
                         Fielder newFielder = new Fielder(LEFT_FIELDER, panel, leftField[hit], fielderColor);
 						list.add(newFielder);
 						newFielder.start();
+						Throw newThrow = new Throw(leftField[hit], panel, secondBase);
+						list.add(newThrow);
+						newThrow.start();
 						moveRunner();
 						numBases = 0;
 						Runner newRunner = new Runner(runnerColor, 0, panel);
 						list.add(newRunner);
 						newRunner.start();
 						runnerCheck[0] = true;
-						if (newFielder.done()) {
-							Fielder newFielderBase = new Fielder(SECOND_BASEMAN, panel, secondBase, fielderColor);
-                        	list.add(newFielderBase);
+						Fielder newFielderBase = new Fielder(SECOND_BASEMAN, panel, secondBase, fielderColor);
+						if (newHit.done()) {
+							list.add(newFielderBase);
 							newFielderBase.start();
-							Throw newThrow = new Throw(leftField[hit], panel, secondBase);
-                        	list.add(newThrow);
-                        	newThrow.start();
 						}
 						isHit = true;
 					//If number is 2 or 3, double
@@ -651,19 +651,19 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
                         Fielder newFielder = new Fielder(LEFT_FIELDER, panel, leftField[hit], fielderColor);
 						list.add(newFielder);
 						newFielder.start();
+						Throw newThrow = new Throw(leftField[hit], panel, thirdBase);
+						list.add(newThrow);
+						newThrow.start();
 						moveRunner();
 						numBases = 1;
 						Runner newRunner = new Runner(runnerColor, 0, panel);
 						list.add(newRunner);
 						newRunner.start();
 						runnerCheck[0] = true;
-						if (newFielder.done()) {
 						Fielder newFielderBase = new Fielder(THIRD_BASEMAN, panel, thirdBase, fielderColor);
-                        list.add(newFielderBase);
-						newFielderBase.start();
-                        Throw newThrow = new Throw(leftField[hit], panel, thirdBase);
-                        list.add(newThrow);
-                        newThrow.start();
+						if (newHit.done()) {
+							list.add(newFielderBase);
+							newFielderBase.start();
 						}
 						isHit = true;
 					//If number is 4, triple
@@ -672,19 +672,19 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
                         Fielder newFielder = new Fielder(LEFT_FIELDER, panel, leftField[hit], fielderColor);
 						list.add(newFielder);
 						newFielder.start();
+						Throw newThrow = new Throw(leftField[hit], panel, homePlate);
+						list.add(newThrow);
+						newThrow.start();
 						moveRunner();
 						numBases = 2;
 						Runner newRunner = new Runner(runnerColor, 0, panel);
 						list.add(newRunner);
 						newRunner.start();
 						runnerCheck[0] = true;
-						if (newFielder.done()) {
 						Fielder newFielderBase = new Fielder(CATCHER, panel, homePlate, fielderColor);
-                        list.add(newFielderBase);
-						newFielderBase.start();
-                        Throw newThrow = new Throw(leftField[hit], panel, homePlate);
-                        list.add(newThrow);
-                        newThrow.start();
+						if (newHit.done()) {
+							list.add(newFielderBase);
+							newFielderBase.start();
 						}
 						isHit = true;
 					//If number is between 5 and 11, out
@@ -724,19 +724,19 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
                         Fielder newFielder = new Fielder(CENTER_FIELDER, panel, centerField[hit], fielderColor);
 						list.add(newFielder);
 						newFielder.start();
+						Throw newThrow = new Throw(centerField[hit], panel, secondBase);
+						list.add(newThrow);
+						newThrow.start();
 						moveRunner();
 						numBases = 0;
 						Runner newRunner = new Runner(runnerColor, 0, panel);
 						list.add(newRunner);
 						newRunner.start();
 						runnerCheck[0] = true;
-						if (newFielder.done()) {
 						Fielder newFielderBase = new Fielder(SECOND_BASEMAN, panel, secondBase, fielderColor);
-                        list.add(newFielderBase);
-						newFielderBase.start();
-                        Throw newThrow = new Throw(centerField[hit], panel, secondBase);
-                        list.add(newThrow);
-                        newThrow.start();
+						if (newHit.done()) {
+							list.add(newFielderBase);
+							newFielderBase.start();
 						}
 						isHit = true;
 					//If number is 2 or 3, double
@@ -745,19 +745,19 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
                         Fielder newFielder = new Fielder(CENTER_FIELDER, panel, centerField[hit], fielderColor);
 						list.add(newFielder);
 						newFielder.start();
+						Throw newThrow = new Throw(centerField[hit], panel, thirdBase);
+						list.add(newThrow);
+						newThrow.start();
 						moveRunner();
 						numBases = 1;
 						Runner newRunner = new Runner(runnerColor, 0, panel);
 						list.add(newRunner);
 						newRunner.start();
 						runnerCheck[0] = true;
-						if (newFielder.done()) {
 						Fielder newFielderBase = new Fielder(THIRD_BASEMAN, panel, thirdBase, fielderColor);
-                        list.add(newFielderBase);
-						newFielderBase.start();
-                        Throw newThrow = new Throw(centerField[hit], panel, thirdBase);
-                        list.add(newThrow);
-                        newThrow.start();
+						if (newHit.done()) {
+							list.add(newFielderBase);
+							newFielderBase.start();
 						}
 						isHit = true;
 					//If number is 4, triple
@@ -766,19 +766,19 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
                         Fielder newFielder = new Fielder(CENTER_FIELDER, panel, centerField[hit], fielderColor);
 						list.add(newFielder);
 						newFielder.start();
+						Throw newThrow = new Throw(centerField[hit], panel, homePlate);
+						list.add(newThrow);
+						newThrow.start();
 						moveRunner();
 						numBases = 2;
 						Runner newRunner = new Runner(runnerColor, 0, panel);
 						list.add(newRunner);
 						newRunner.start();
 						runnerCheck[0] = true;
-						if (newFielder.done()) {
 						Fielder newFielderBase = new Fielder(CATCHER, panel, homePlate, fielderColor);
-                        list.add(newFielderBase);
-						newFielderBase.start();
-                        Throw newThrow = new Throw(centerField[hit], panel, homePlate);
-                        list.add(newThrow);
-                        newThrow.start();
+						if (newHit.done()) {
+							list.add(newFielderBase);
+							newFielderBase.start();
 						}
 						isHit = true;
 					//If number is between 5 and 11, out
@@ -819,19 +819,19 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
                         Fielder newFielder = new Fielder(RIGHT_FIELDER, panel, rightField[hit], fielderColor);
 						list.add(newFielder);
 						newFielder.start();
+						Throw newThrow = new Throw(rightField[hit], panel, secondBase);
+						list.add(newThrow);
+						newThrow.start();
 						moveRunner();
 						numBases = 0;
 						Runner newRunner = new Runner(runnerColor, 0, panel);
 						list.add(newRunner);
 						newRunner.start();
 						runnerCheck[0] = true;
-						if (newFielder.done()) {
 						Fielder newFielderBase = new Fielder(SHORT_STOP, panel, secondBase, fielderColor);
-                        list.add(newFielderBase);
-						newFielderBase.start();
-                        Throw newThrow = new Throw(rightField[hit], panel, secondBase);
-                        list.add(newThrow);
-                        newThrow.start();
+						if (newHit.done()) {
+							list.add(newFielderBase);
+							newFielderBase.start();
 						}
 						isHit = true;
 					//If number is 2 or 3, double
@@ -840,19 +840,19 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
                         Fielder newFielder = new Fielder(RIGHT_FIELDER, panel, rightField[hit], fielderColor);
 						list.add(newFielder);
 						newFielder.start();
+						Throw newThrow = new Throw(rightField[hit], panel, thirdBase);
+						list.add(newThrow);
+						newThrow.start();
 						moveRunner();
 						numBases = 1;
 						Runner newRunner = new Runner(runnerColor, 0, panel);
 						list.add(newRunner);
 						newRunner.start();
 						runnerCheck[0] = true;
-						if (newFielder.done()) {
 						Fielder newFielderBase = new Fielder(THIRD_BASEMAN, panel, thirdBase, fielderColor);
-                        list.add(newFielderBase);
-						newFielderBase.start();
-                        Throw newThrow = new Throw(rightField[hit], panel, thirdBase);
-                        list.add(newThrow);
-                        newThrow.start();
+						if (newHit.done()) {
+							list.add(newFielderBase);
+							newFielderBase.start();
 						}
 						isHit = true;
 					//If number is 4, triple
@@ -861,19 +861,19 @@ public class BaseballGame extends MouseAdapter implements Runnable, ActionListen
                         Fielder newFielder = new Fielder(RIGHT_FIELDER, panel, rightField[hit], fielderColor);
 						list.add(newFielder);
 						newFielder.start();
+						Throw newThrow = new Throw(rightField[hit], panel, homePlate);
+						list.add(newThrow);
+                        newThrow.start();
 						moveRunner();
 						numBases = 2;
 						Runner newRunner = new Runner(runnerColor, 0, panel);
 						list.add(newRunner);
 						newRunner.start();
 						runnerCheck[0] = true;
-						if (newFielder.done()) {
 						Fielder newFielderBase = new Fielder(CATCHER, panel, homePlate, fielderColor);
-                        list.add(newFielderBase);
-						newFielderBase.start();
-                        Throw newThrow = new Throw(rightField[hit], panel, homePlate);
-                        list.add(newThrow);
-                        newThrow.start();
+						if (newHit.done()) {
+							list.add(newFielderBase);
+							newFielderBase.start();
 						}
 						isHit = true;
 					//If number is between 5 and 11, out
